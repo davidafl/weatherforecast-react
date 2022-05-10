@@ -37,7 +37,7 @@ function App() {
                                                              addLocation={
                                                                     (location)=>{ setLocations(addLocation(locations,location)) }
                                                              }
-                                            />
+                                             />
             }/>
             <Route path="*" element={<NoPage/>}/>
           </Route>

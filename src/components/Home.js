@@ -1,4 +1,5 @@
 import {useState} from "react";
+import FormFetchWithHook from "./FormFetchWithHook";
 
 function Home(props) {
 
@@ -13,15 +14,16 @@ function Home(props) {
                     <button type="button"
                             className="list-group-item list-group-item-action"
                             key={location.id}
-                            onClick={(e)=>{setChoice(location.id)}}>
+                            onClick={(e)=>{setChoice(location)}}>
                         {location.name}
                     </button>
                 ))}
             </div>
             <div>
-                <h5>current choice: {choice}</h5>
+                { choice && <h5>current choice: {choice.name}</h5> }
             </div>
-            <button type="button" className="btn-primary mt-2">get Forecast</button>
+
+            <FormFetchWithHook choice={choice}/>
         </div>
     );
 
