@@ -9,18 +9,21 @@ function Home(props) {
     return (
         <div>
             <h3>Home</h3>
-            <div className="list-group">
+            <div className="list-group mt-2">
                 {props.locations.map(location => (
                     <button type="button"
                             className="list-group-item list-group-item-action"
                             key={location.id}
                             onClick={(e)=>{setChoice(location)}}>
-                        {location.name}
+                        {location.city}
                     </button>
                 ))}
             </div>
-            <div>
-                { choice && <h5>current choice: {choice.name}</h5> }
+            <div className="mt-2">
+                { choice &&
+                <div className="alert alert-info" role="alert">
+                    current choice: {choice.city}
+                </div>}
             </div>
 
             <FormFetchWithHook choice={choice}/>

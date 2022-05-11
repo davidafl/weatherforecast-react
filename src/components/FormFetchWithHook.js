@@ -41,13 +41,13 @@ export default function FormFetchWithHook(props) {
         <>
             <form
                 onSubmit={event => {
+                    event.preventDefault();
                     doFetch(
                         `https://www.7timer.info/bin/api.pl?lon=${props.choice.longitude}&lat=${props.choice.latitude}&product=civillight&output=json`,
                     );
-                    event.preventDefault();
                 }}
             >
-                <button className="btn btn-primary" type="submit">Search</button>
+                <button className="btn btn-primary mt-2" type="submit">Search</button>
             </form>
 
             {isError && <div>Something went wrong ...</div>}

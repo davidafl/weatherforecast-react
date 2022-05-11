@@ -8,11 +8,11 @@ import LocationEditor from './components/LocationEditor';
 import NoPage from './components/NoPage';
 
 
-const locationsInit =
-    [{id:0, name:"Jerusalem", longtitude:31.7683, latitude:35.2137},
-    {id:1, name:"Tel Aviv", longtitude:32.0853, latitude:34.7817},
-    {id:2, name:"Haifa", longtitude:32.8153, latitude:34.9817},
-    {id:3, name:"Beer Sheva", longtitude:31.2553, latitude:34.8817}]
+ const locationsInit = []
+//     [{id:0, name:"Jerusalem", longtitude:31.7683, latitude:35.2137},
+//     {id:1, name:"Tel Aviv", longtitude:32.0853, latitude:34.7817},
+//     {id:2, name:"Haifa", longtitude:32.8153, latitude:34.9817},
+//     {id:3, name:"Beer Sheva", longtitude:31.2553, latitude:34.8817}]
 
 function deleteLocation(locations, id) {
     return locations.filter(location => location.id !== id);

@@ -28,8 +28,7 @@ function LocationEditor(props) {
 
         if (inputs.city === undefined || inputs.city === "") {
             errors.city = "Name is required";
-        } else if (props.locations.find(location => location.name === inputs.city))
-            //find(loc => loc.name === action.location.name)
+        } else if (props.locations.find(location => location.city === inputs.city))
             errors.city = "City already exists";
 
 
@@ -54,36 +53,43 @@ function LocationEditor(props) {
         setError(errors);
         // check if there are any errors
         if (Object.keys(errors).length === 0) {
-            props.addLocation({name:inputs.city,latitude:inputs.latitude,longitude:inputs.longitude})
+            props.addLocation({city:inputs.city,latitude:inputs.latitude,longitude:inputs.longitude})
         }
     }
 
 
     return (
         <>
-            <div className="list-group">
+            <h3>Locations</h3>
+            <div className="list-group mt-2">
                 {props.locations.map(location => (
                     <button type="button"
                             className="list-group-item list-group-item-action"
                             key={location.id}>
-                        {location.name}
+                        {location.city}
                         <span className={"btn btn-danger float-end"}
                                 onClick={(e)=>{props.deleteLocation(location.id)}}>X</span>
                     </button>
                 ))}
             </div>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="city">City:</label><br/>
-                <input type="text" id="city" name="city" value={inputs.city || ""} onChange={handleChange}/><br/>
-                {error.city && <div className={"text-danger"}>{error.city}</div>}
+            <form onSubmit={handleSubmit} className="mt-2">
+                <div className="form-group">
+                    <label htmlFor="city">City:</label><br/>
+                    <input type="text" className="form-control" id="city" name="city" value={inputs.city || ""} onChange={handleChange}/><br/>
+                    {error.city && <div className={"text-danger"}>{error.city}</div>}
+                </div>
 
-                <label htmlFor="longitude">Longtitude:</label><br/>
-                <input type="text" id="longitude" name="longitude" value={inputs.longitude || ""} onChange={handleChange}/><br/>
-                {error.longitude && <div className={"text-danger"}>{error.longitude}</div>}
+                <div className="form-group">
+                    <label htmlFor="longitude">Longtitude:</label><br/>
+                    <input type="text" className="form-control" id="longitude" name="longitude" value={inputs.longitude || ""} onChange={handleChange}/><br/>
+                    {error.longitude && <div className={"text-danger"}>{error.longitude}</div>}
+                </div>
 
-                <label htmlFor="latitude">Latitude:</label><br/>
-                <input type="text" id="latitude" name="latitude" value={inputs.latitude || ""} onChange={handleChange}/><br/>
-                {error.latitude && <div className={"text-danger"}>{error.latitude}</div>}
+                <div className="form-group">
+                    <label htmlFor="latitude">Latitude:</label><br/>
+                    <input type="text" className="form-control" id="latitude" name="latitude" value={inputs.latitude || ""} onChange={handleChange}/><br/>
+                    {error.latitude && <div className={"text-danger"}>{error.latitude}</div>}
+                </div>
 
                 <button type="submit" className="btn btn-primary">Add</button>
             </form>
