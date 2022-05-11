@@ -27,8 +27,6 @@ const useDataApi = (initialUrl, initialData) => {
         setIsLoading(false); // set loading state to false to hide loading indicator
     };
 
-    //fetchData(); // execute the function above
-
     return [{ data, isLoading, isError }, fetchData]; // return the data and the URL setter function
 };
 
@@ -36,7 +34,7 @@ export default function FormFetchWithHook(props) {
     const [query, setQuery] = useState('');
     const [{ data, isLoading, isError }, doFetch] = useDataApi(
         '',
-        { hits: [] },
+        { dataseries: [] },
     );
 
     return (
@@ -49,7 +47,6 @@ export default function FormFetchWithHook(props) {
                     event.preventDefault();
                 }}
             >
-                <input type="text" className="form-control" value={query} onChange={event => setQuery(event.target.value)}/>
                 <button className="btn btn-primary" type="submit">Search</button>
             </form>
 
@@ -57,22 +54,37 @@ export default function FormFetchWithHook(props) {
 
             {isLoading ? (
                 <div className="alert alert-warning">Loading ...</div>
-            ) : (
-                <ol>
-                    <li>
-                        weather: fuck
-                    </li>
-                </ol>
+            ) : ( data.dataseries.length > 0  &&
+                        <div className="text-center">
+                            <img src={`https://www.7timer.info/bin/astro.php?%20lon=${props.choice.longitude}&lat=${props.choice.latitude}&ac=0&lang=en&unit=metric&output=internal&tzshift=0`}
+                                 className="img-fluid" alt="ForecastImage"/>
+                            <div className="table-responsive">
+                                <table className="table">
+                                    <caption>Weekly Forecast</caption>
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Weather</th>
+                                        <th scope="col">Minimum Temperature</th>
+                                        <th scope="col">Maximum Temperature</th>
+                                        <th scope="col">Wind</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {data.dataseries.map(item => (
+                                        <tr key={item.date.toString()}>
+                                            <td>{item.date.toString().substr(6, 2) + '/' + item.date.toString().substr(4, 2) + '/' + item.date.toString().substr(0, 4)}</td>
+                                            <td>{item.weather}</td>
+                                            <td>{item.temp2m.min}</td>
+                                            <td>{item.temp2m.max}</td>
+                                            <td>{item.wind10m_max}</td>
+                                        </tr>
+                                    ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
             )}
         </>
     );
 }
-/*
-                <ol>
-                    {data.hits.map(item => (
-                        <li>
-                            weather: {item}
-                        </li>
-                    ))}
-                </ol>
- */

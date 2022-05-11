@@ -18,45 +18,34 @@ function LocationEditor(props) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
-    // clear all errors
-    function clearErrors() {
-        setError({});
-    }
-
     const handleSubmit = (event) => {
         event.preventDefault();
         // validate
 
+        // clear errors
         setError({});
         const errors = {}
 
         if (inputs.city === undefined || inputs.city === "") {
-            //setError(values => ({...values, city: "Name is required"}));
             errors.city = "Name is required";
-        } else if (props.locations.find(location => location.city === inputs.city))
-            //setError(values => ({...values, city: "City already exists"}));
+        } else if (props.locations.find(location => location.name === inputs.city))
+            //find(loc => loc.name === action.location.name)
             errors.city = "City already exists";
 
 
         if (inputs.longitude === undefined || inputs.longitude === "") {
-            //setError(values => ({...values, longitude: "Longitude is required"}));
             errors.longitude = "Longitude is required";
         } else if (!isNumeric(inputs.longitude)) {
-            //setError(values => ({...values, longitude: "Longitude must be a number"}));
             errors.longitude = "Longitude must be a number";
         } else if (inputs.longitude < -180 || inputs.longitude > 180) {
-            //setError(values => ({...values, longitude: "Longitude must be between -180 and 180"}));
             errors.longitude = "Longitude must be between -180 and 180";
         }
 
         if (inputs.latitude === undefined || inputs.latitude === "") {
-            //setError(values => ({...values, latitude: "Latitude is required"}));
             errors.latitude = "Latitude is required";
         } else if (!isNumeric(inputs.latitude)) {
-            //setError(values => ({...values, latitude: "Latitude must be a number"}));
             errors.latitude = "Latitude must be a number";
         } else if (inputs.latitude < -90 || inputs.latitude > 90) {
-            //setError(values => ({...values, latitude: "Latitude must be between -90 and 90"}));
             errors.latitude = "Latitude must be between -90 and 90";
         }
 
@@ -95,7 +84,6 @@ function LocationEditor(props) {
                 <label htmlFor="latitude">Latitude:</label><br/>
                 <input type="text" id="latitude" name="latitude" value={inputs.latitude || ""} onChange={handleChange}/><br/>
                 {error.latitude && <div className={"text-danger"}>{error.latitude}</div>}
-
 
                 <button type="submit" className="btn btn-primary">Add</button>
             </form>
