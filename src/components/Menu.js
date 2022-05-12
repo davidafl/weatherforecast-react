@@ -1,5 +1,10 @@
 import {Link, Outlet} from "react-router-dom";
 
+/**
+ * @description Menu component
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function Menu() {
     return (
         <>

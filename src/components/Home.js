@@ -1,5 +1,6 @@
 import {useState} from "react";
-import FormFetchWithHook from "./FormFetchWithHook";
+import GetForecast from "./GetForecast";
+import CityList from "./CityList";
 
 function Home(props) {
 
@@ -9,16 +10,11 @@ function Home(props) {
     return (
         <div>
             <h3>Home</h3>
-            <div className="list-group mt-2">
-                {props.locations.map(location => (
-                    <button type="button"
-                            className="list-group-item list-group-item-action"
-                            key={location.id}
-                            onClick={(e)=>{setChoice(location)}}>
-                        {location.city}
-                    </button>
-                ))}
-            </div>
+            {props.locations.length === 0 &&
+            <div className="alert alert-warning" role="alert">
+                No locations found. please add some.
+            </div>}
+            <CityList setChoice={setChoice} locations={props.locations}/>
             <div className="mt-2">
                 { choice &&
                 <div className="alert alert-info" role="alert">
@@ -26,7 +22,7 @@ function Home(props) {
                 </div>}
             </div>
 
-            <FormFetchWithHook choice={choice}/>
+            <GetForecast choice={choice}/>
         </div>
     );
 
