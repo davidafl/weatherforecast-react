@@ -11,7 +11,9 @@ function LocationEditor(props) {
 
     return (
         <>
-            <h3>Locations</h3>
+            <div className={"mt-2"}>
+                <h3>Locations</h3>
+            </div>
 
             <CityList locations={props.locations} deleteLocation={props.deleteLocation}/>
 

@@ -59,7 +59,12 @@ const useDataApi = (initialUrl, initialData) => {
 
     return [{ data, isLoading, isError }, fetchData]; // return the data and the URL setter function
 };
-
+/**
+ * this function returns a function that will be used as a callback
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function GetForecast(props) {
     const [{ data, isLoading, isError }, doFetch] = useDataApi(
         '',
@@ -87,7 +92,7 @@ export default function GetForecast(props) {
                          className="img-fluid" alt="loadingImage"/>
                 </div>
             ) : ( data.dataseries.length > 0  &&
-                        <div className="text-center">
+                        <div className="text-center mt-2">
                             <img src={`https://www.7timer.info/bin/astro.php?%20lon=${props.choice.longitude}&lat=${props.choice.latitude}&ac=0&lang=en&unit=metric&output=internal&tzshift=0`}
                                  className="img-fluid" alt="ForecastImage"/>
                             <div className="table-responsive mt-2">

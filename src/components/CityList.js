@@ -1,3 +1,12 @@
+/**
+ * component CityList
+ * creates the selectable list of cities
+ * if deleteLocatoion function is provided it will add a delete button, otherwise it will not
+ * if setChoice function is provided it will set the selected city
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function CityList(props) {
     return (
         <div className="list-group mt-2">
